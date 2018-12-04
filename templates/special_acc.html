@@ -1,0 +1,49 @@
+{% extends "bootstrap/base.html"%}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<meta http-equiv="refresh" content="5" charset="UTF-8"/>
+{% endblock %}
+{% block title %}PAY WALLETS{% endblock %}
+{%block content%}
+<table class="table table-hover">
+  <thead class="alert alert-info">
+    <tr>
+        <th scope="col">AcceptMoment</th>
+        <th scope="col">EventDate</th>
+        <th scope="col">TypeBet</th>
+        <th scope="col">IsVip</th>
+        <th scope="col">Currency</th>
+        <th scope="col">TradingType</th>
+        <th scope="col">SportName</th>
+        <th scope="col">GroupName</th>
+        <th scope="col">EventName</th>
+        <th scope="col">Selection</th>
+        <th scope="col">Odd</th>
+        <th scope="col">Stake</th>
+        <th scope="col">Profit</th>
+        <th scope="col">IsCashout</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for index, row in data.iterrows() %}
+  <tr>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['AcceptMoment']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['EventDate']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['TypeBet']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['IsVip']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['Currency']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['TradingType']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['SportName']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['GroupName']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['EventName']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['Selection']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['Odd']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['Stake']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['Profit']|safe}}</td>
+      <td onclick="window.open('wallets?account={{row['Account']}}');">{{row['IsCashout']|safe}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

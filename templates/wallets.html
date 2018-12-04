@@ -1,0 +1,66 @@
+{% extends "bootstrap/base.html"%}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<meta http-equiv="refresh" content="5" charset="UTF-8"/>
+{% endblock %}
+{% block title %}PAY WALLETS{% endblock %}
+{%block content%}
+<table class="table table-hover">
+  <thead class="alert alert-info">
+    <tr>
+        <th scope="col">DatePayment</th>
+        <th scope="col">Account</th>
+        <th scope="col">CardNumber</th>
+        <th scope="col"></th>
+        <th scope="col">Status</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Country</th>
+        <th scope="col">Transaction</th>
+        <th scope="col">Forget</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for index, row in data.iterrows() %}
+  <tr>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['DatePayment']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Account']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['CardNumber']|safe}}</td>
+      {% if row['Status'] == 'Отмониторенные' %}
+      <td bgcolor="#43a047"></td>
+      {% elif row['Status'] == 'Мошенники' %}
+      <td bgcolor="#212121"></td>
+      {% elif row['Status'] in ['Good guys', 'Good guys-X'] %}
+      <td bgcolor="#18ffff"></td>
+      {% elif row['Status'] in ['VIP-Platinum', 'VIP-Silver', 'VIP-Gold', 'VIP-Casino'] %}
+      <td bgcolor="#f57c00"></td>
+      {% elif row['Status'] == 'Подозрительные' %}
+      <td bgcolor="#7e57c2"></td>
+      {% elif row['Status'] in ['Вилочники', 'Вилочники без VIP', 'Вилочники Беларусь']%}
+      <td bgcolor="#ffff00"></td>
+      {% elif row['Status'] == 'Под мониторингом'%}
+      <td bgcolor="#42a5f5"></td>
+       {% elif row['Status'] == 'Dangerous'%}
+      <td bgcolor="#e64a19"></td>
+      {% else %}
+      <td bgcolor="#e0e0e0"></td>
+      {% endif %}
+    <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Status']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Amount']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Currency']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Country']|safe}}</td>
+      <td onclick="window.open('wallets?card={{row['CardNumber']}}');">{{row['Transaction']|safe}}</td>
+     <td>
+
+            <form action="" method="post">
+                <button class="btn btn-danger" type="submit" name="delete" value="{{row['CardNumber']}}">
+                    <span class="glyphicon glyphicon-trash"></span> Delete</button></form>
+          </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+
